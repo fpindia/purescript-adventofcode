@@ -20,5 +20,5 @@ You can edit this file as you like.
   , "bignumber"
   ]
 , packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, sources = [ "src/**/*.purs" ]
 }
