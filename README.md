@@ -22,13 +22,18 @@ If this prints a brief help message then you are all set with the dev tools!
 
 This is needed if you want to be able to automatically download your puzzle input.
 
- - login to [adventofcode](https://adventofcode.com/), and copy your session cookie. With firefox:
-   - hit F12 in order to open the developper console
-   - go to «Cookie»
+- First login to [Advent of Code](https://adventofcode.com).
+- Then with Firefox:
+   - hit F12 in order to open the developer console
+   - go to «Storage» tab, select «Cookies» in the left hand pane
    - Copy the «value» field of the «session» Cookie. On the screenshot, it's the part that starts with «536…»
   ![](docs/aoc-cookie-ff.png)
- - copy the `.env.example` file into `.env`.
- - paste the cookie in the AOC_COOKIE variable. The `.env` file should look like this:
+- Or with Chrome:
+   - Right-click, inspect, to open developer tools.
+   - Go to «Network» tab, refresh the page to see all the network requests
+   - In the left «name» pane, Click on the HTML request. click «Cookies» tab on the right page, and grab the value for «session» cookie.
+- Copy the `.env.template` file into `.env`.
+- Paste the cookie in the AOC_COOKIE variable. The `.env` file should look like this:
 ```
 AOC_COOKIE="536…"
 AOC_INPUT_DIRECTORY="input"
