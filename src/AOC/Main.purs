@@ -1,18 +1,29 @@
 module AOC.Main where
 
 import Options.Applicative
+
+import AOC.Lib (inputFileLocationYearDay, writeInputYearDay)
+import Control.Applicative (pure)
 import Control.Apply ((<*>))
-import Control.Bind ((=<<))
+import Control.Bind (bind, discard, (=<<))
+import Data.Function (($))
 import Data.Functor ((<$>))
 import Data.Maybe (Maybe, fromMaybe, optional)
+import Data.Options (Options(..), (:=))
 import Data.Semigroup ((<>))
-import Data.Unit (Unit)
+import Data.Show (show)
+import Data.Unit (Unit, unit)
 import Effect (Effect)
+import Effect.Aff (launchAff_, runAff)
+import Effect.Class (liftEffect)
+import Effect.Class.Console (log)
 import Effect.Uncurried as EFn
+import Node.Path (FilePath)
 
 type Year = Int
 type Day = Int
 type Part = Int
+type Cookie = String
 data Command = Bootstrap Year Day | Download Year Day | Run Year Day (Maybe Part)
 
 configOptions :: Parser Command
@@ -54,12 +65,21 @@ opts = info (configOptions <**> helper)
   <> progDesc "Run a command. One of - bootstrap | download | run"
   <> header "aoc - A Purescript Advent of Code starter kit" )
 
+foreign import aoc_cookie :: Effect String
+
 doit :: Command -> Effect Unit
-doit (Bootstrap year day) = EFn.runEffectFn2 bootstrap year day
-doit (Download year day) = EFn.runEffectFn2 download year day
-doit (Run year day mpart) = EFn.runEffectFn3 run year day (fromMaybe 0 mpart)
+doit (Bootstrap year day) = do
+  doit (Download year day)
+  EFn.runEffectFn2 bootstrap year day
+doit (Download year day) = do
+  cookie <- aoc_cookie
+  loc <- inputFileLocationYearDay (show year) (show day)
+  EFn.runEffectFn4 download year day cookie loc
+doit (Run year day mpart) = do
+  loc <- inputFileLocationYearDay (show year) (show day)
+  EFn.runEffectFn4 run year day (fromMaybe 0 mpart) loc
 
 
 foreign import bootstrap :: EFn.EffectFn2 Year Day Unit
-foreign import download :: EFn.EffectFn2 Year Day Unit
-foreign import run :: EFn.EffectFn3 Year Day Part Unit
+foreign import download :: EFn.EffectFn4 Year Day Cookie FilePath Unit
+foreign import run :: EFn.EffectFn4 Year Day Part String Unit

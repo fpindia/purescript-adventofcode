@@ -97,23 +97,7 @@ The `src/Year2020/Day05.purs` is simple but it contains all you need: 2 methods,
 
 ```purescript
 module Year2020.Day05 where
-
-import Control.Bind (bind, discard)
-import Control.Category ((<<<))
-import Data.Array as A
-import Data.Foldable (product)
-import Data.Function (($))
-import Data.Functor (map, (<$>))
-import Data.Int (round)
-import Data.Maybe (Maybe(..))
-import Data.Ring ((-))
-import Data.Semigroup ((<>))
-import Data.Show (show)
-import Data.Unit (Unit)
-import Effect (Effect)
-import Effect.Class.Console (log)
-import Util.Input (readInputLines)
-import Util.Parse (unsafeParseInt10)
+...
 
 --------------------------------------------------------------------------------
 -- Write your solutions here
@@ -131,13 +115,7 @@ part2 = do
 
 --------------------------------------------------------------------------------
 -- IMPORTANT: Don't modify anything below this
--- Automatic metadata detection
-data AOC_2020_05 = AOC_2020_05
-aoc :: AOC_2020_05
-aoc = AOC_2020_05
-instance aoc_2020_05 :: AOC AOC_2020_05 where
-  day = "05"
-  year = "2020"
+...
 ```
 
 ### aoc run YEAR DAY
@@ -147,10 +125,10 @@ Use `aoc run` to quickly run your current solution and measuring the execution t
 ```
 ./aoc run 2020 5
 Part 1 ==> ...
-(obtained in 2.1908000235271174e-05 seconds)
+Obtained in: 0.296ms
 
 Part 2 ==> ...
-(obtained in 2.1908000235271174e-05 seconds)
+Obtained in: 0.296ms
 ```
 
 You can also run only a specific part with the `--part` flag.

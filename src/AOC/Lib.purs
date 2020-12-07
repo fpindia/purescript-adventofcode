@@ -1,13 +1,14 @@
 module AOC.Lib where
 
 import Control.Applicative (pure)
-import Control.Bind (bind)
+import Control.Bind (bind, (=<<))
 import Data.Array as A
 import Data.BigNumber (BigNumber, parseBigNumber)
 import Data.Boolean (otherwise)
 import Data.Either (Either(..))
 import Data.EuclideanRing ((-))
 import Data.Foldable (foldl)
+import Data.Function (($))
 import Data.Functor ((<$>))
 import Data.Int (round)
 import Data.Maybe (Maybe(..))
@@ -16,10 +17,11 @@ import Data.Semigroup ((<>))
 import Data.Show (show)
 import Data.String as S
 import Data.String.Pattern (Pattern)
+import Data.Unit (Unit)
 import Effect (Effect)
 import Global (isNaN)
 import Node.Encoding (Encoding(..))
-import Node.FS.Sync (readTextFile)
+import Node.FS.Sync (readTextFile, writeTextFile)
 import Unsafe.Coerce (unsafeCoerce)
 
 
@@ -74,21 +76,24 @@ chunk len contents
 --------------------------------------------------------------------------------
 -- Getting the input
 
--- Metadata
-class AOC aoc where
-  year :: aoc -> String
-  day :: aoc -> String
+foreign import getInputDirectory :: Effect String
 
--- | The location of the input file
-inputFileLocation :: forall aoc. AOC aoc => aoc -> String
-inputFileLocation aoc = "inputs/year" <> year aoc <> "/day" <> day aoc
+-- | The location of the input file, given a year and day
+inputFileLocationYearDay :: String -> String -> Effect String
+inputFileLocationYearDay y d = do
+  inputDirectory <- getInputDirectory
+  pure $ inputDirectory <> "/year" <> y <> "/day" <> d
 
--- | Read the entire input file into a single string
-readInput :: forall aoc. AOC aoc => aoc -> Effect String
-readInput aoc = readTextFile UTF8 (inputFileLocation aoc)
+-- | Read the entire input file into a single string, given a year and day
+readInputYearDay :: String -> String -> Effect String
+readInputYearDay year day = readTextFile UTF8 =<< inputFileLocationYearDay year day
 
--- | Which solution to run?
-data SolutionPart = Part1 | Part2
+-- | Write the input file, given a year and day
+writeInputYearDay :: String -> String -> String -> Effect Unit
+writeInputYearDay year day contents = do
+  loc <- inputFileLocationYearDay year day
+  writeTextFile UTF8 loc contents
+
 
 --------------------------------------------------------------------------------
 -- Parsing
