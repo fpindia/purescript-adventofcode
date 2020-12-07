@@ -187,11 +187,11 @@ Also included are a bunch of helper functions in `AOC.Lib`.
 
 **NOTE:** Normally you won't need to use the below functions, since the input is automatically passed to the `part1` and `part2` functions.
 
-* ```inputFileLocation :: forall aoc. AOC aoc => aoc -> String```
+* ```inputFileLocation :: Int -> Int -> String```
 
     The location of the input file
 
-* ```readInput :: forall aoc. AOC aoc => aoc -> Effect String```
+* ```readInput :: Int -> Int -> Effect String```
 
     Read the entire input file into a single string
 
