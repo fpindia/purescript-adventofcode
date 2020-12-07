@@ -112,9 +112,6 @@ part2 = do
   let result = "<TODO>"
   log $ "Part 2 ==> " <> result
 
-
---------------------------------------------------------------------------------
--- IMPORTANT: Don't modify anything below this
 ...
 ```
 
