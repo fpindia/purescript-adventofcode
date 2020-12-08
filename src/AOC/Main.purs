@@ -2,21 +2,15 @@ module AOC.Main where
 
 import Options.Applicative
 
-import AOC.Lib (inputFileLocationYearDay, writeInputYearDay)
-import Control.Applicative (pure)
+import AOC.Lib (inputFileLocationYearDay)
 import Control.Apply ((<*>))
 import Control.Bind (bind, discard, (=<<))
-import Data.Function (($))
 import Data.Functor ((<$>))
 import Data.Maybe (Maybe, fromMaybe, optional)
-import Data.Options (Options(..), (:=))
 import Data.Semigroup ((<>))
 import Data.Show (show)
-import Data.Unit (Unit, unit)
+import Data.Unit (Unit)
 import Effect (Effect)
-import Effect.Aff (launchAff_, runAff)
-import Effect.Class (liftEffect)
-import Effect.Class.Console (log)
 import Effect.Uncurried as EFn
 import Node.Path (FilePath)
 

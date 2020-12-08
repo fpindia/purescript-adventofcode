@@ -6,6 +6,7 @@ You can edit this file as you like.
 , dependencies =
   [ "aff"
   , "ansi"
+  , "bignumber"
   , "console"
   , "debug"
   , "effect"
@@ -14,10 +15,11 @@ You can edit this file as you like.
   , "node-fs"
   , "node-readline"
   , "optparse"
+  , "parsing"
+  , "free"
   , "psci-support"
   , "stringutils"
   , "strings"
-  , "bignumber"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
