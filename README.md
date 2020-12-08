@@ -127,7 +127,7 @@ Part 1 ==> ...
 Obtained in: 0.296ms
 
 Part 2 ==> ...
-Obtained in: 0.296ms
+Obtained in: 0.3i9ms
 ```
 
 You can also run only a specific part with the `--part` flag.
@@ -135,7 +135,7 @@ You can also run only a specific part with the `--part` flag.
 ```
 ./aoc run 2020 5 --part1
 Part 1 ==> ...
-(obtained in 2.1908000235271174e-05 seconds)
+Obtained in: 0.297ms
 ```
 
 ### aoc download YEAR DAY
