@@ -2,6 +2,8 @@
 
 This is a Purescript starter kit for [Advent of Code](https://adventofcode.com/) solutions.
 
+[Example of a repo that uses this starter kit](https://github.com/ajnsit/purescript-adventofcode).
+
 ## Installation
 
 ### Clone the repo and build
