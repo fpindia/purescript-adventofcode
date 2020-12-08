@@ -5,7 +5,9 @@ import Control.Bind (bind, (=<<))
 import Data.Array as A
 import Data.BigNumber (BigNumber, parseBigNumber)
 import Data.Boolean (otherwise)
+import Data.CommutativeRing ((+))
 import Data.Either (Either(..))
+import Data.Eq ((==))
 import Data.EuclideanRing ((-))
 import Data.Foldable (foldl)
 import Data.Function (($))
@@ -52,6 +54,29 @@ intToBigNumber :: Int -> BigNumber
 intToBigNumber x = case parseBigNumber (show x) of
   Left _ -> unsafeCoerce "IMPOSSIBLE: fromInt: INVALID BIGNUM!"
   Right y -> y
+
+--------------------------------------------------------------------------------
+-- Array splitting
+
+-- | Split an array into two parts:
+-- |
+-- | 1. the longest initial subarray for which all elements return a Just value
+-- |    for the supplied function, and returns the values mapped to the Just values
+-- | 2. the remaining elements
+spanMap :: forall a b. (a -> Maybe b) -> Array a -> {init :: Array b, rest :: Array a}
+spanMap p arr = go 0 []
+  where
+  go i prev = case A.index arr i of
+    Nothing -> {init: prev, rest: []}
+    Just x -> case p x of
+      Nothing ->
+        { init: prev
+        , rest:
+            if i == 0
+              then arr
+              else A.slice i (A.length arr) arr
+        }
+      Just b -> go (i + 1) (A.snoc prev b)
 
 --------------------------------------------------------------------------------
 -- Text splitting

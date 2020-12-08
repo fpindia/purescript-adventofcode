@@ -174,6 +174,15 @@ Also included are a bunch of helper functions in `AOC.Lib`.
 
     Convert an integer into a bignumber
 
+### Array Utilities
+
+* ```spanMap :: forall a b. (a -> Maybe b) -> Array a -> {init :: Array b, rest :: Array a}```
+
+    Split an array into two parts:
+       1. the longest initial subarray for which all elements return a Just value
+          for the supplied function, and returns the values mapped to the Just values
+       2. the remaining elements
+
 ### Text splitting
 
 * ```splitFirst :: Pattern -> String -> Maybe {left::String, right::String}```
