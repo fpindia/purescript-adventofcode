@@ -119,7 +119,7 @@ part2 = do
 
 ### aoc run YEAR DAY
 
-Use `aoc run` to quickly run your current solution and measuring the execution time for you.
+Use `aoc run` to quickly run your current solution and measure the execution time.
 
 ```
 ./aoc run 2020 5
