@@ -150,7 +150,10 @@ This will download the input into a file called `inputs/year2020/day5`.
 
 ## Helper functions available
 
-This project includes a bignumber library [bignumber](https://github.com/athanclark/purescript-bignumber).
+This project includes the following libraries -
+1. [Bignumber](https://github.com/athanclark/purescript-bignumber). For dealing with arbitrarily large integers that don't fit in 64 bits.
+2. [Parsing](https://github.com/purescript-contrib/purescript-parsing). Parsec style parsing for Purescript.
+3. [Free](https://github.com/purescript/purescript-free). Useful to build interpreters and automatons.
 
 Also included are a bunch of helper functions in `AOC.Lib`.
 
